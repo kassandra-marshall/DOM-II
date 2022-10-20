@@ -55,15 +55,24 @@ document.body.addEventListener('mouseover', (event) => {
 // 10- wheel
 const images = document.querySelectorAll('img');
 for (let image of images) {
-    image.addEventListener('click', () => {
-        image.style.animationFillMode = 'forwards'
+    image.addEventListener('wheel', (event) => {
+        
+        zoom(event)    
     })
 }
-
-
-
-
-
-
+let scale = 1;
+function zoom(event) {
+    event.preventDefault();
+  
+    scale += event.deltaY * -0.01;
+  
+    // Restrict scale
+    scale = Math.min(Math.max(.125, scale), 4);
+  
+    // Apply scale transform
+    event.target.style.transform = `scale(${scale})`;
+  }
+  
+  
 
 }
